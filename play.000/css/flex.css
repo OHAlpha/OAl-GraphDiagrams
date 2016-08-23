@@ -1,0 +1,74 @@
+/**
+ * Force body to fill window
+ */
+html, body {
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Use #pseudobody in place of body.
+ */
+#pseudobody {
+  /**
+   * Make absolute to allow child to overflow without resizing body.
+   */
+  position: absolute;
+  /**
+   * Create a flex row to position #bodycolum, along with .bodypanel's, in the
+   * center of the window.
+   */
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: stretch;
+
+  /**
+   * Force #pseudobody to fill body.
+   */
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  margin: 0;
+}
+
+.bodypanel {
+  flex: 1 1;
+
+  width: 1px;
+  height: 1;
+}
+
+#bodycolumn {
+  flex: 0 1 auto;
+
+  width: 800px;
+  height: 1;
+
+  /* padding: 5px; */
+
+  overflow: auto;
+}
+
+#centerguard {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 100%;
+
+  padding: .25em;
+}
+
+#centerguard article {
+  flex: 0 0;
+
+  width: 750px;
+
+  margin: .25em;
+}
