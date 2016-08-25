@@ -84,6 +84,9 @@ main.centerguard {
   overflow: auto;
 }
 
+footer.centerguard {
+}
+
 main.centerguard section {
   flex: 0 0;
 
@@ -91,7 +94,4 @@ main.centerguard section {
 
   margin: .25em;
   /* margin: .5em; */
-}
-
-footer.centerguard {
 }

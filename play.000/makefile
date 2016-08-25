@@ -6,7 +6,7 @@ web-flex-binfiles := bin/web-flex-browser/flex.html $(subst .browser,,$(subst cs
 
 web-files := dir/graph_editor.ext dir/graph_diagram.ext
 web-htmlfiles := $(subst dir,html,$(subst .ext,.html,$(web-files)))
-web-cssfiles := $(subst dir,css,$(subst .ext,.css,$(web-files))) css/main.css css/main.debug.css
+web-cssfiles := $(subst dir,css,$(subst .ext,.css,$(web-files))) css/main.css css/main.debug.css css/graph.css css/graph.debug.css
 web-jsfiles := $(subst dir,js,$(subst .ext,.js,$(web-files)))
 web-genfiles := $(subst dir,css,$(subst .ext,.css,$(web-files))) $(subst dir,js,$(subst .ext,.js,$(web-files)))
 web-otherfiles := $(web-cssfiles) $(web-jsfiles)
