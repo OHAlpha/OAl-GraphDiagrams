@@ -8,10 +8,11 @@ web-files := dir/graph_editor.ext dir/graph_diagram.ext
 web-htmlfiles := $(subst dir,html,$(subst .ext,.html,$(web-files)))
 web-cssfiles := $(subst dir,css,$(subst .ext,.css,$(web-files))) css/main.css css/main.debug.css css/graph.css css/graph.debug.css
 web-jsfiles := $(subst dir,js,$(subst .ext,.js,$(web-files)))
+web-imgfiles := img/*.jpg img/*.png
 web-genfiles := $(subst dir,css,$(subst .ext,.css,$(web-files))) $(subst dir,js,$(subst .ext,.js,$(web-files)))
 web-otherfiles := $(web-cssfiles) $(web-jsfiles)
-web-allfiles := $(web-htmlfiles) $(web-otherfiles)
-web-binfiles := $(subst html/,bin/web-browser/,$(web-htmlfiles)) $(subst css/,bin/web-browser/,$(web-cssfiles)) $(subst js/,bin/web-browser/,$(web-jsfiles))
+web-allfiles := $(web-htmlfiles) $(web-otherfiles) $(web-imgfiles)
+web-binfiles := $(subst html/,bin/web-browser/,$(web-htmlfiles)) $(subst css/,bin/web-browser/,$(web-cssfiles)) $(subst js/,bin/web-browser/,$(web-jsfiles)) $(subst img/,bin/web-browser/,$(web-imgfiles))
 
 flex-web-binfiles := $(subst .browser,,$(subst css/,bin/web-browser/,$(flex-cssfiles)))
 
