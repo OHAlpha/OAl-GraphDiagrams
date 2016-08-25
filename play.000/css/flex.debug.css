@@ -50,16 +50,23 @@ body {
   border-width: 2px;
 }
 
-#centerguard {
+header.centerguard {
+  background-color: cyan;
+
+  border-style: solid;
+  border-color: green;
+  border-width: 5px;
+}
+
+main.centerguard {
   background-color: white;
 
-  box-sizing: border-box;
-  border-style: doubled;
+  border-style: solid;
   border-color: black;
   border-width: 1px;
 }
 
-#centerguard article {
+main.centerguard section {
   background-color: black;
 
   border-style: solid;
@@ -67,4 +74,12 @@ body {
   border-width: 2px;
 
   color: white;
+}
+
+footer.centerguard {
+  background-color: magenta;
+
+  border-style: solid;
+  border-color: green;
+  border-width: 5px;
 }

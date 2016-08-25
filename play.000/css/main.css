@@ -1,0 +1,19 @@
+#pseudobody {
+	background-color: gray;
+}
+
+#bodycolumn {
+	background-color: white;
+	border-left-style: solid;
+	border-left-color: black;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-right-color: black;
+	border-right-width: 1px;
+}
+
+#centerguard section {
+	border-style: outset;
+	border-color: gray;
+	border-width: 3px;
+}

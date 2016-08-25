@@ -1,38 +1,59 @@
-flex-cssfiles := css/flex.css css/flex.debug.css
+flex-cssfiles := css/flex.browser.css css/flex.debug.css
 
-web-flex-htmlfiles := html/flex.html
 web-flex-cssfiles := $(flex-cssfiles)
-web-flex-allfiles := html/flex.html css/flex.css css/flex.debug.css
-web-flex-binfiles := bin/web-flex/flex.html $(subst css/,bin/web-flex/,$(flex-cssfiles))
+web-flex-allfiles := html/flex.html $(web-flex-cssfiles)
+web-flex-binfiles := bin/web-flex-browser/flex.html $(subst .browser,,$(subst css/,bin/web-flex-browser/,$(flex-cssfiles)))
 
 web-files := dir/graph_editor.ext dir/graph_diagram.ext
 web-htmlfiles := $(subst dir,html,$(subst .ext,.html,$(web-files)))
-web-cssfiles := $(subst dir,css,$(subst .ext,.css,$(web-files)))
+web-cssfiles := $(subst dir,css,$(subst .ext,.css,$(web-files))) css/main.css css/main.debug.css
 web-jsfiles := $(subst dir,js,$(subst .ext,.js,$(web-files)))
+web-genfiles := $(subst dir,css,$(subst .ext,.css,$(web-files))) $(subst dir,js,$(subst .ext,.js,$(web-files)))
 web-otherfiles := $(web-cssfiles) $(web-jsfiles)
 web-allfiles := $(web-htmlfiles) $(web-otherfiles)
-web-binfiles := $(subst dir,bin/web,$(subst .ext,.html,$(web-files)) $(subst .ext,.css,$(web-files)) $(subst .ext,.js,$(web-files)))
+web-binfiles := $(subst html/,bin/web-browser/,$(web-htmlfiles)) $(subst css/,bin/web-browser/,$(web-cssfiles)) $(subst js/,bin/web-browser/,$(web-jsfiles))
 
-flex-web-binfiles := $(subst css/,bin/web/,$(flex-cssfiles))
-
-web-flex:
-	[ -d bin/web-flex ] || mkdir -p bin/web-flex
-	cp -f $(web-flex-allfiles) bin/web-flex
-
-web-flex-clean:
-	-rm $(web-flex-binfiles)
-	-rmdir bin/web-flex
-
-web: web-ensure-files $(web-allfiles)
-	[ -d bin/web ] || mkdir -p bin/web
-	cp -f $(web-allfiles)  $(web-flex-cssfiles) bin/web
+flex-web-binfiles := $(subst .browser,,$(subst css/,bin/web-browser/,$(flex-cssfiles)))
 
 web-ensure-files:
 	for f in $(web-otherfiles); do [ -f $$f ] || touch $$f; done
 
-web-clean:
-	-rm $(web-binfiles) $(flex-web-binfiles)
-	-rmdir bin/web
-	for f in $(web-otherfiles); do [ -f "$1" ] && ! [ -s "$1" ] && rm $$f; done
+web-flex-chrome:
+	[ -d bin/web-flex-chrome ] || mkdir -p bin/web-flex-chrome
+	cp -f $(subst browser,chrome,$(web-flex-allfiles)) bin/web-flex-chrome
+	mv bin/web-flex-chrome/flex.chrome.css bin/web-flex-chrome/flex.css
 
-clean: web-flex-clean web-clean
+web-chrome: web-ensure-files $(web-allfiles)
+	[ -d bin/web-chrome ] || mkdir -p bin/web-chrome
+	cp -f  $(subst browser,chrome,$(web-allfiles))  $(subst browser,chrome,$(web-flex-cssfiles)) bin/web-chrome
+	mv bin/web-chrome/flex.chrome.css bin/web-chrome/flex.css
+
+web-flex-chrome-clean:
+	-rm  $(subst browser,chrome,$(web-flex-binfiles))
+	-rmdir bin/web-flex-chrome
+
+web-chrome-clean:
+	-rm  $(subst browser,chrome,$(web-binfiles))  $(subst browser,chrome,$(flex-web-binfiles))
+	-rmdir bin/web-chrome
+	for f in $(web-genfiles); do [ -f "$$f" ] && ! [ -s "$$f" ] && rm $$f; done
+
+web-flex-firefox:
+	[ -d bin/web-flex-firefox ] || mkdir -p bin/web-flex-firefox
+	cp -f $(subst browser,firefox,$(web-flex-allfiles)) bin/web-flex-firefox
+	mv bin/web-flex-firefox/flex.firefox.css bin/web-flex-firefox/flex.css
+
+web-firefox: web-ensure-files $(web-allfiles)
+	[ -d bin/web-firefox ] || mkdir -p bin/web-firefox
+	cp -f  $(subst browser,firefox,$(web-allfiles))  $(subst browser,firefox,$(web-flex-cssfiles)) bin/web-firefox
+	mv bin/web-firefox/flex.firefox.css bin/web-firefox/flex.css
+
+web-flex-firefox-clean:
+	-rm  $(subst browser,firefox,$(web-flex-binfiles))
+	-rmdir bin/web-flex-firefox
+
+web-firefox-clean:
+	-rm  $(subst browser,firefox,$(web-binfiles))  $(subst browser,firefox,$(flex-web-binfiles))
+	-rmdir bin/web-firefox
+	for f in $(web-genfiles); do [ -f "$$f" ] && ! [ -s "$$f" ] && rm $$f; done
+
+clean: web-flex-chrome-clean web-chrome-clean web-flex-firefox-clean web-firefox-clean
